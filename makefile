@@ -1,5 +1,5 @@
 compile:
-	swift build
+	swift build -Xswiftc -suppress-warnings
 
 link:
 	sudo rm -rf ./build/debug/github-user-cli

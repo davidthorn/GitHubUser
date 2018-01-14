@@ -14,8 +14,10 @@ extension GitHubUser {
             throw GitHubUserError.couldNotLoadUserFromJSON
         }
 
-        return GitHubUser(id: id , name: name)
-    
+        let user = GitHubUser(id: id , name: name)
+        user.data = json
+
+        return user
     }
 
 

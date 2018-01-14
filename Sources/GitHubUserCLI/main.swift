@@ -19,4 +19,4 @@ guard let user = GitHubUser.load(name:name) else  {
     exit(2)
 }
 
-print("\(user.name) with id: \(user.id)")
+print("\(user.name) with id: \(user.id) repo url = \(user.reposUrl)")
