@@ -26,5 +26,15 @@ extension  GitHubUser {
 
     }
 
+
+     public var publicRepos: Int? {
+
+        guard let count = self.data[GitHubUserKeys.publicRepos.rawValue] as? Int else  {
+            return nil
+        }
+
+        return count
+
+    }
 }
 

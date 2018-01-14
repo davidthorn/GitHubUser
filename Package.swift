@@ -27,6 +27,7 @@ let package = Package(
             name: "GitHubUserCLI",
             dependencies: [
                 .target(name: "GitHubUser")
+                , "DataRequest"
             ]),
         .testTarget(
             name: "GitHubUserTests",

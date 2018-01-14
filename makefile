@@ -10,9 +10,12 @@ test:
 	rm -rf .build
 	make
 	make link	
-	github-user-cli reactivex
-	github-user-cli davidthorn
-	github-user-cli fakename-whic-could-not-exist
+	github-user-cli reactivex id --access_token=${access_token}
+	github-user-cli davidthorn id --access_token=${access_token}
+	github-user-cli fakename-whic-could-not-exist --access_token=${access_token}
+
+token:
+	github-user-cli davidthorn id --access_token=${access_token}
 
 commit:
 	git checkout -b feature

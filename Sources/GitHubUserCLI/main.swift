@@ -1,10 +1,23 @@
 import GitHubUser
 import Foundation
+import DataRequest
 
 var arguments = CommandLine.arguments
 
 // appName github-user-cli
 let _ = arguments.removeFirst()
+
+let accessToken = arguments.filter { argument in
+    return argument.contains("--access_token")
+}
+
+arguments = arguments.filter{ argument in
+    return !argument.contains("--access_token")
+}
+
+if accessToken.count == 1 {
+    DataRequest.accessToken = accessToken[0].components(separatedBy: "=")[1]
+}
 
 
 guard arguments.count >= 1 else {
@@ -15,17 +28,19 @@ guard arguments.count >= 1 else {
 let name = arguments.removeFirst() 
 
 guard let user = GitHubUser.load(name:name) else  {
-    print("it did not work")
+    print("loading the git hub user did not work")
     exit(2)
 }
-
-print("\(user.name) with id: \(user.id) repo url = \(user.reposUrl)")
 
 guard arguments.count > 0  else { exit(3) }
 
 let cmd = arguments.removeFirst()
 
 switch cmd {
+    case "id":
+
+        print("User  Id  of: \(user.id)")
+    
     case "repos":
         let repos = user.repos
 
@@ -35,6 +50,22 @@ switch cmd {
             print("repo name: \(name)")
 
         }
+
+    case "reposUrl":
+        guard let url = user.reposUrl else {
+            print("Repos Url: nil")
+            exit(4)
+        }
+        
+        print("Repos Url: \(url)")
+
+    case "publicRepos":
+        guard let count = user.publicRepos else {
+            print("Public Repos Count: nil")
+            exit(4)
+        }
+        
+        print("Public Repos Count: \(count)")
 
     default: break
 
