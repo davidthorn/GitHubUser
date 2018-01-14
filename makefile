@@ -16,7 +16,7 @@ test:
 commit:
 	git checkout -b feature
 	git add .
-	git commit -am "feature branch: saving state"
+	git commit -am "feature branch: ${message}"
 	git checkout develop
 	git merge feature
 	git branch -D feature	
