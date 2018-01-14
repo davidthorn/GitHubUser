@@ -20,3 +20,4 @@ commit:
 	git checkout develop
 	git merge feature
 	git branch -D feature	
+	git log --graph --oneline --decorate
