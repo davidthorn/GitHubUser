@@ -6,6 +6,7 @@ link:
 	sudo cp ./.build/debug/GitHubUserCLI /usr/bin/github-user-cli
 
 test:
+	rm -rf Package.resolved
 	rm -rf .build
 	make
 	make link	

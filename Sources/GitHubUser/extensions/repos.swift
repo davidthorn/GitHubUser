@@ -9,7 +9,7 @@ extension  GitHubUser {
 
     public var reposUrl: String? {
 
-        guard let url = self.data["repos_url"] as? String else  {
+        guard let url = self.data[GitHubUserKeys.reposUrl.rawValue] as? String else  {
             return nil
         }
 
