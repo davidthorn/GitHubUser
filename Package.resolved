@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "DataRequest",
+        "repositoryURL": "https://github.com/davidthorn/DataRequest.git",
+        "state": {
+          "branch": null,
+          "revision": "602f740310e82a388a57546ea68c277fa4f3cb0e",
+          "version": "1.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
