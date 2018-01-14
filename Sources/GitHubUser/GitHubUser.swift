@@ -4,13 +4,13 @@ import Dispatch
 
 public class GitHubUser {
 
-    public var id: String
+    public var id: Int
 
     public var name: String
 
     public var data: JSON = [:]
 
-    private init(id: String , name: String ) {
+    internal init(id: Int , name: String ) {
         self.name = name
         self.id = id
     }
@@ -36,8 +36,16 @@ public class GitHubUser {
                 switch result  {
                     case .success(let rawValue):
 
-                        user = GitHubUser(id: "" , name: "")
-                        print("we have a result \(rawValue)")
+                        do {
+
+                            guard let json = rawValue as? JSON else {
+                                throw GitHubUserError.couldNotConvertRawValueToJSON
+                            }
+                            user = try GitHubUser.loadFrom(json: json )
+
+                        } catch let _error {
+                            error = _error
+                        }
 
                     case .fail(let _error):
                         error = _error

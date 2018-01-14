@@ -14,4 +14,9 @@ guard arguments.count >= 1 else {
 
 let name = arguments.removeFirst() 
 
-let user = GitHubUser.load(name:name)
+guard let user = GitHubUser.load(name:name) else  {
+    print("it did not work")
+    exit(2)
+}
+
+print("\(user.name) with id: \(user.id)")
