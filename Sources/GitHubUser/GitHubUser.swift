@@ -1,7 +1,6 @@
 import DataRequest
 import Dispatch
 
-
 public class GitHubUser {
 
     public var id: Int
@@ -14,8 +13,20 @@ public class GitHubUser {
         return DispatchQueue(label: "davidthorn.githubuser.load.queue", attributes: .concurrent)
     }
 
+    fileprivate static var _username: String?
+
+    fileprivate static var _user: GitHubUser?
+
+    fileprivate static var _group: DispatchGroup?
+
     internal static var group: DispatchGroup {
-        return DispatchGroup()
+
+       if self._group == nil {
+            self._group = DispatchGroup()
+        }
+
+        return self._group!
+
     }
 
     internal static var error: Error? = nil
@@ -25,6 +36,44 @@ public class GitHubUser {
         self.id = id
     }
 
+    public static func apiUrl(for name: String) -> String {
+        return "https://api.github.com/users/\(name)"
+    }
+
+    internal static var workItem: DispatchWorkItem {
+
+        guard let name = self._username else  {
+            fatalError("_username has not been set")
+        }
+
+        let urlString = self.apiUrl(for: name) 
+
+        return DispatchWorkItem {
+            
+            let task = JSONRequest.rawValue(url: urlString) { result in
+
+                do {
+
+                    self._user = try self.load(from: result)
+
+                } catch let _error {
+                    self.error = _error
+                }
+
+                self.group.leave()
+
+            }
+
+            guard let runnable = task else {
+                self.group.leave()
+                fatalError("task cannot start")
+            }
+
+            runnable.resume()
+        }
+
+    }
+
     /**
     *   Loads a GitHubUser using the name provided
     *
@@ -32,34 +81,20 @@ public class GitHubUser {
     */
     public static func load(name: String) -> GitHubUser? {
 
-        var user: GitHubUser? = nil
+        self._user = nil
 
-        let _group = self.group
-        _group.enter()
+        self._username = name
 
-        let item = DispatchWorkItem {
+        self.group
+        
+        // keep a private copy of the group
+        self.group.enter()
 
-             let urlString = "https://api.github.com/users/\(name)"
-
-            JSONRequest.rawValue(url: urlString) { result in
-
-                do {
-
-                    user = try self.load(from: result)
-
-                } catch let _error {
-                    self.error = _error
-                }
-
-                _group.leave()
-            }?.resume()
-        }
-
-        self.queue.async(execute: item)
+        self.queue.async(execute: self.workItem)
        
-        _group.wait()
+        self.group.wait()
 
-        guard self.error == nil , let gitUser = user else {
+        guard self.error == nil , let gitUser = self._user else {
             print(self.error!)
             return nil
         }

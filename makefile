@@ -1,9 +1,9 @@
 compile:
-	swift build -Xswiftc -suppress-warnings
+	swift build -Xswiftc -suppress-warnings --configuration release
 
 link:
-	sudo rm -rf ./build/debug/github-user-cli
-	sudo cp ./.build/debug/GitHubUserCLI /usr/bin/github-user-cli
+	sudo rm -rf ./build/release/github-user-cli
+	sudo cp ./.build/release/GitHubUserCLI /usr/bin/github-user-cli
 
 test:
 	rm -rf Package.resolved
@@ -12,7 +12,7 @@ test:
 	make link	
 	github-user-cli reactivex id --access_token=${access_token}
 	github-user-cli davidthorn id --access_token=${access_token}
-	github-user-cli fakename-whic-could-not-exist --access_token=${access_token}
+	github-user-cli fakename-which-could-not-exist --access_token=${access_token}
 
 token:
 	github-user-cli davidthorn id --access_token=${access_token}
