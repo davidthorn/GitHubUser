@@ -4,7 +4,7 @@ extension  GitHubUser {
 
     public var repos: [JSON] {
         
-        var _repos: [JSON] = []
+        let _repos: [JSON] = []
 
         guard let url = self.reposUrl else { return _repos }
 

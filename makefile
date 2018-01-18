@@ -1,3 +1,6 @@
+
+TOKEN=$(shell cat ./.token)
+
 compile:
 	swift build -Xswiftc -suppress-warnings --configuration release
 
@@ -10,12 +13,13 @@ test:
 	rm -rf .build
 	make
 	make link	
-	github-user-cli reactivex id --access_token=${access_token}
-	github-user-cli davidthorn id --access_token=${access_token}
-	github-user-cli fakename-which-could-not-exist --access_token=${access_token}
+	github-user-cli reactivex id --access_token=$(TOKEN)
+	github-user-cli davidthorn id --access_token=$(TOKEN)
+	github-user-cli fakename-which-could-not-exist --access_token=$(TOKEN)
 
 token:
-	github-user-cli davidthorn id --access_token=${access_token}
+
+	github-user-cli davidthorn id --access_token=$(TOKEN)
 
 commit:
 	git checkout -b feature
@@ -25,3 +29,6 @@ commit:
 	git merge feature
 	git branch -D feature	
 	git log --graph --oneline --decorate
+
+show-token:
+	echo $(TOKEN)
