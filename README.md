@@ -1,5 +1,9 @@
 # GitHubUser
 
+## Documentation
+
+[GitHub User Documentation](https://github.com/davidthorn/GitHubUser/tree/develop/Sources/GitHubUser)
+
 ## Installation
 
 
