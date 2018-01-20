@@ -6,6 +6,6 @@
   "author": "David Thorn <david.thorn221278@googlemail.com>",
   "license": "MIT",
   "dependencies": {
-    "DataRequest": "1.0.0"
+    "davidthorn/DataRequest": "1.0.0"
   }
 }
