@@ -2,6 +2,7 @@ import DataRequest
 
 extension GitHubUser {
 
+    /*
     internal static func loadFrom(json: JSON ) throws -> GitHubUser {
 
          guard let id = json[GitHubUserKeys.id.rawValue] as? Int else {
@@ -24,6 +25,6 @@ extension GitHubUser {
 
         return user
     }
-
+    */
 
 } 

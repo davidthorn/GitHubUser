@@ -27,8 +27,8 @@ guard arguments.count >= 1 else {
 
 let name = arguments.removeFirst() 
 
-guard let user = GitHubUser.load(name:name) else  {
-    print("loading the git hub user did not work")
+guard let user = GitHubUser.load(name: name) else {
+    print("could not load user")
     exit(2)
 }
 
@@ -52,20 +52,12 @@ switch cmd {
         }
 
     case "reposUrl":
-        guard let url = user.reposUrl else {
-            print("Repos Url: nil")
-            exit(4)
-        }
         
-        print("Repos Url: \(url)")
+        print("Repos Url: \(user.urls.repos)")
 
     case "publicRepos":
-        guard let count = user.publicRepos else {
-            print("Public Repos Count: nil")
-            exit(4)
-        }
         
-        print("Public Repos Count: \(count)")
+        print("Public Repos Count: \(user.publicRepos)")
 
     default: break
 

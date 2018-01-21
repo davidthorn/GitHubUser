@@ -17,9 +17,12 @@ test:
 	github-user-cli davidthorn id --access_token=$(TOKEN)
 	github-user-cli fakename-which-could-not-exist --access_token=$(TOKEN)
 
-token:
+token: compile link
 
 	github-user-cli davidthorn id --access_token=$(TOKEN)
+	github-user-cli davidthorn name --access_token=$(TOKEN)
+	github-user-cli davidthorn reposUrl --access_token=$(TOKEN)
+	github-user-cli davidthorn repos --access_token=$(TOKEN)
 
 commit:
 	git checkout -b feature

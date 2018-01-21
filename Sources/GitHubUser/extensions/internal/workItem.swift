@@ -18,12 +18,22 @@ extension GitHubUser {
 
         return DispatchWorkItem {
             
-            let task = JSONRequest.rawValue(url: urlString) { result in
+            let task = DataRequest.from(url: urlString) { result in
 
                 do {
 
-                    self._user = try self.load(from: result)
+                    switch result {
+                        case .success(let data):
 
+                            let jsonDecoder = JSONDecoder()
+                            self._user = try jsonDecoder.decode(GitHubUser.self, from: data)
+
+                        case .fail(let _error):
+
+                            throw _error
+                    }
+
+           
                 } catch let _error {
                     self.error = _error
                 }

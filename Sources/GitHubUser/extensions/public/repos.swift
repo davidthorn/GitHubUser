@@ -6,9 +6,7 @@ extension  GitHubUser {
         
         let _repos: [JSON] = []
 
-        guard let url = self.reposUrl else { return _repos }
-
-        guard let data = DataRequest.loadSync(url: url) else { return _repos }
+        guard let data = DataRequest.loadSync(url: self.reposUrl) else { return _repos }
 
         guard let jsonArray = data as? [JSON] else { return _repos }
 
@@ -16,24 +14,11 @@ extension  GitHubUser {
 
     }
 
-    public var reposUrl: String? {
+    public var reposUrl: String {
 
-        guard let url = self.data[GitHubUserKeys.reposUrl.rawValue] as? String else  {
-            return nil
-        }
-
-        return url
+       return self.urls.repos
 
     }
 
-     public var publicRepos: Int? {
-
-        guard let count = self.data[GitHubUserKeys.publicRepos.rawValue] as? Int else  {
-            return nil
-        }
-
-        return count
-
-    }
 }
 
