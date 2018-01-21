@@ -12,8 +12,6 @@ public class GitHubUser: Decodable {
 
     public var publicRepos: Int
 
-    public var data: JSON = [:]
-
     internal static var _username: String?
 
     internal static var _user: GitHubUser?
@@ -64,6 +62,19 @@ extension GitHubUser: CustomStringConvertible {
 
     }
 
+}
+
+extension GitHubUser: Encodable {
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: GitHubUserKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(publicRepos, forKey: .publicRepos)
+
+        try urls.encode(to: encoder)
+
+    }
 }
 
 

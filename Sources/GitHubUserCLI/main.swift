@@ -37,6 +37,23 @@ guard arguments.count > 0  else { exit(3) }
 let cmd = arguments.removeFirst()
 
 switch cmd {
+    
+     case "urls":
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+
+        let data = try encoder.encode(user.urls)
+        print(String(data: data, encoding: .utf8)!)
+     
+     case "json":
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+
+        let data = try encoder.encode(user)
+        print(String(data: data, encoding: .utf8)!)
+   
     case "id":
 
         print("User  Id  of: \(user.id)")
