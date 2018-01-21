@@ -1,6 +1,5 @@
-import DataRequest
-import Dispatch
 import Foundation
+import GitHubUserUrls
 
 public class GitHubUser: Decodable {
 
@@ -11,14 +10,6 @@ public class GitHubUser: Decodable {
     public var urls: GitHubUserUrls
 
     public var publicRepos: Int
-
-    internal static var _username: String?
-
-    internal static var _user: GitHubUser?
-
-    internal static var _group: DispatchGroup?
-
-    internal static var error: Error? = nil
 
     internal init(id: Int , 
                 urls: GitHubUserUrls , 
