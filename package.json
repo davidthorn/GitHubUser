@@ -1,0 +1,11 @@
+{
+  "name": "GitHubUser",
+  "version": "0.0.0",
+  "description": "",
+  "repository": "https://github.com/davidthorn/GitHubUser.git",
+  "author": "David Thorn <david.thorn221278@googlemail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "DataRequest": "~1.0.0"
+  }
+}
