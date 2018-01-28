@@ -36,6 +36,7 @@ class GitHubUserTests: XCTestCase {
 
    func testDecode() {
 
+       
         let jsonString = """
         {
             "id": 1233,
@@ -47,7 +48,7 @@ class GitHubUserTests: XCTestCase {
             "followers_url": "followers",
             "following_url": "following",
             "gists_url": "gists",
-            "repos_url": "repos"  
+            "repos_url": "repos" 
         }
         """.data(using: .utf8)!
 
@@ -56,8 +57,8 @@ class GitHubUserTests: XCTestCase {
             let decoder = JSONDecoder()
             let _ = try decoder.decode(GitHubUser.self , from: jsonString)
 
-        } catch {
-            XCTFail("it should not come here")
+        } catch let error{
+            XCTFail("it should not come here: \(error.localizedDescription)")
         }
 
    }
